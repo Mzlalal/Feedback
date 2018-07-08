@@ -1,0 +1,68 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "Microsoft YaHei", "微软雅黑", '\65B0\5B8B\4F53', '\5B8B\4F53', Verdana;
+}
+.nav{
+  position: absolute;
+}
+li{
+  list-style: none;
+
+  padding: 0 20px;
+
+  float: left;
+
+  position: relative;
+}
+li::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 100%;
+
+  width: 0;
+
+  height: 100%;
+
+  border-bottom: 2px solid #000;
+
+  transition: 0.2s all linear;
+
+}
+
+
+
+li:hover::before {
+
+  width: 100%;
+  left: 0;
+
+}
+
+
+
+li:hover ~ li::before {
+
+  left: 0;
+
+}
+
+.load{
+  opacity: 1;
+  animation: opacity 2s;
+}
+@keyframes  opacity{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+

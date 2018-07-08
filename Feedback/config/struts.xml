@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 开发模式 -->
+    <constant name="struts.devMode" value="false"></constant>
+
+    <package name="feedback" namespace="/" extends="struts-default">
+        <action name="index" class="net.newture.action.IndexAction"
+            method="getIndexInfo">
+            <result name="success">/pages/sys/main.jsp</result>
+        </action>
+        <action name="getSysMenu"
+            class="net.newture.action.IndexAction" method="getSysMenu">
+            <result name="success">/pages/sys/leftNavigation.jsp</result>
+        </action>
+        <action name="login" class="net.newture.action.UserAction"
+            method="login">
+            <result name="success">/pages/sys/login.jsp</result>
+            <result name="logined" type="redirect">
+                <param name="location">/index</param>
+            </result>
+        </action>
+        <action name="loginCheck" class="net.newture.action.UserAction"
+            method="loginCheck">
+            <result name="success" type="redirect">
+                <param name="location">/index</param>
+            </result>
+            <result name="error" type="chain">login</result>
+        </action>
+        <!-- 用户 -->
+        <action name="userAction_*" class="net.newture.action.UserAction"
+            method="{1}">
+            <result name="logout">/pages/sys/login.jsp</result>
+            <result name="add">/pages/user/add.jsp</result>
+            <result name="edit">/pages/user/updateUser.jsp</result>
+            <result name="query">/pages/user/queryUser.jsp</result>
+            <result name="saveCheckError" type="chain">userAction_add</result>
+            <result name="updateCheckError" type="chain">userAction_edit</result>
+            <result name="saveCheckError" type="chain">userAction_add</result>
+            <result name="list">/pages/user/userList.jsp</result>
+            <result name="updatePwd">/pages/sys/updatePwd.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 班级课程 -->
+        <action name="ccAction_*"
+            class="net.newture.action.ClassCourseAction" method="{1}">
+             <result name="query">/pages/classCourse/queryClassCourse.jsp</result>
+             <result name="queryCheckError" type="chain">ccAction_query</result>
+            <result name="insert">/pages/classCourse/updateClassCourse.jsp</result>
+            <result name="list">/pages/classCourse/classCourse.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 课程 -->
+        <action name="courseAction_*"
+            class="net.newture.action.CourseAction" method="{1}">
+            <result name="query">/pages/course/queryCourse.jsp</result>
+            <result name="queryCheckError" type="chain">courseAction_query</result>
+            <result name="findAll">/pages/course/course.jsp</result>
+            <result name="insert"> /pages/course/updateCourse.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 部门 -->
+        <action name="departmentAction_*"
+            class="net.newture.action.DepartmentAction" method="{1}">
+            <result name="manage">/pages/department/manage.jsp</result>
+            <result name="updateCheckError" type="chain">departmentAction_manage</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 角色 -->
+        <action name="roleAction_*" class="net.newture.action.RoleAction"
+            method="{1}">
+            <result name="list">/pages/role/roleList.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 班级 -->
+        <action name="classAction_*"
+            class="net.newture.action.ClassAction" method="{1}">
+            <result name="query">/pages/classes/queryClasses.jsp</result>
+            <result name="queryCheckError" type="chain">classAction_query</result>
+            <result name="findAll">/pages/classes/classes.jsp</result>
+            <result name="insert"> /pages/classes/updateClasses.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 反馈批次管理 -->
+        <action name="feedback_*" class="net.newture.action.FeedBackAction" method="{1}">
+            <result name="query">/pages/feedback/queryfeedback.jsp</result>
+            <result name="start">/pages/feedback/startfeedback.jsp</result>
+            <result name="save">/pages/feedback/startfeedback.jsp</result>
+            <result name="edit">/pages/feedback/updateFeedback.jsp</result>
+            <result name="endstatus">/pages/util/success.jsp</result>
+            <result name="update">/pages/util/success.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+            <result name="end">/pages/feedback/endfeedback.jsp</result>
+        </action>
+        
+        <!-- 教学基地 -->
+        <action name="baseAction_*" class="net.newture.action.BaseAction" method="{1}">
+            <result name="list">/pages/teaching_base/base.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        
+        <!-- 个人建议管理 -->
+        <action name="feedbackConAction_*" class="net.newture.action.FeedbackConAction" method="{1}">
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+            <result name="findAll">/pages/suggesstion/querySugg.jsp</result>
+            <result name="suggesstion">/pages/suggesstion/addSugg.jsp</result>
+             <result name="update">/pages/suggesstion/updateSugg.jsp</result>
+        </action>
+        
+        <!-- 报表管理 -->
+        <action name="reportAction_*" class="net.newture.action.ReportAction" method="{1}">
+            <result name="class">/pages/report/classCheck.jsp</result>
+            <result name="classReport">/pages/report/classReport.jsp</result>
+            <result name="teacher">/pages/report/teacherCheck.jsp</result>
+            <result name="teacherReport">/pages/report/teacherReport.jsp</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 教学反馈内容 -->
+        <action name="feedbackConAction_*" class="net.newture.action.FeedbackConAction" method="{1}">
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+            <result name="findAll">/pages/suggesstion/querySugg.jsp</result>
+            <result name="suggesstion">/pages/suggesstion/querySugg.jsp</result>
+        </action>
+        
+        <!-- 评分管理 -->
+        <action name="gradeAction_*" class="net.newture.action.GradeAction" method="{1}">
+       		<result name="manage">/pages/grade/score_manage.jsp</result>
+       		<result name="add">/pages/grade/add.jsp</result>
+       		<result name="grade">/pages/grade/grade.jsp</result>
+        	<result name="success">/pages/util/success.jsp</result>
+            <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+         <!-- 用户角色维护 -->
+        <action name="userroleAction_*" class="net.newture.action.UserRoleAction" method="{1}">
+              <result name="list">/pages/userRoleMaint/userRole.jsp</result>
+              <result name="updating">/pages/userRoleMaint/updateUserRole.jsp</result>
+              <result name="success">/pages/util/success.jsp</result>
+              <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 角色菜单维护 -->
+        <action name="roleMenuAction_*" class="net.newture.action.RoleMenuAction" method="{1}">
+              <result name="list">/pages/roleMenuMaint/roleMenu.jsp</result>
+              <result name="updatefour">/pages/roleMenuMaint/sonMenuFour.jsp</result>
+              <result name="updatethree">/pages/roleMenuMaint/sonMenuThree.jsp</result>
+              <result name="updatetwo">/pages/roleMenuMaint/sonMenuTwo.jsp</result>
+              <result name="updateone">/pages/roleMenuMaint/sonMenuOne.jsp</result>
+               <result name="success">/pages/util/success.jsp</result>
+              <result name="error">/pages/util/error.jsp</result>
+        </action>
+        
+        <!-- 系统管理 -->
+        <action name="menuAction_*" class="net.newture.action.MenuAction" method="{1}">
+            <result name="error">/pages/util/error.jsp</result>
+            <result name="queryCheckError" type="chain">menuAction_found</result>
+            <result name="success">/pages/util/success.jsp</result>
+            <result name="add">/pages/menu/addMenu.jsp</result>
+            <result name="xitong">/pages/menu/xitong.jsp</result>
+            <result name="list">/pages/menu/xitong.jsp</result>
+            <result name="found">/pages/menu/foundMenu.jsp</result>
+            <result name="toupdate">/pages/menu/updateMenu.jsp</result>
+        </action>
+    </package>
+</struts>
